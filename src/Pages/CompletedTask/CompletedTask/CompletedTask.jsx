@@ -1,9 +1,10 @@
 import React from "react";
+import CompletedTaskTable from "../CompletedTaskTable/CompletedTaskTable";
 
 const CompletedTask = () => {
   return (
-    <div className="flex min-h-screen justify-center items-center">
-      <h1>Completed Task</h1>
+    <div className=" min-h-screen ">
+      <CompletedTaskTable />
     </div>
   );
 };

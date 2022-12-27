@@ -1,9 +1,10 @@
 import React from "react";
+import TaskForm from "../TaskForm/TaskForm";
 
 const AddTask = () => {
   return (
-    <div className="flex min-h-screen justify-center items-center">
-      <h1>Add Task </h1>
+    <div className="min-h-screen md:mx-72">
+      <TaskForm />
     </div>
   );
 };

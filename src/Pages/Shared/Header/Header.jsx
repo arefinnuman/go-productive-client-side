@@ -50,8 +50,8 @@ const Header = () => {
         <Link to="/completed-task">
           <Navbar.Link>Completed Tasks</Navbar.Link>
         </Link>
-        <Link to="/about">
-          <Navbar.Link>About</Navbar.Link>
+        <Link to="/blog">
+          <Navbar.Link>Blog</Navbar.Link>
         </Link>
       </Navbar.Collapse>
     </Navbar>
