@@ -42,7 +42,7 @@ const Header = () => {
       </div>
       <Navbar.Collapse>
         <Link to="/add-task">
-          <Navbar.Link active={true}>Add Task</Navbar.Link>
+          <Navbar.Link>Add Task</Navbar.Link>
         </Link>
         <Link to="/my-task">
           <Navbar.Link>My Task</Navbar.Link>

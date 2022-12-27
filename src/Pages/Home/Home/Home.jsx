@@ -1,9 +1,12 @@
 import React from "react";
+import GetStarted from "../GetStarted/GetStarted";
+import HomeFeature from "../HomeFeature/HomeFeature";
 
 const Home = () => {
   return (
     <div>
-      <h1>Home</h1>
+      <GetStarted />
+      <HomeFeature />
     </div>
   );
 };
