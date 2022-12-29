@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
+import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Context/AuthProvider";
 
@@ -16,7 +17,33 @@ const CompletedTaskTable = () => {
       .catch((err) => {
         toast(err.message);
       });
-  }, [user?.email]);
+  }, [user?.email, myTasks]);
+
+  // Task to pending Mode
+  const handleTaskPending = (id) => {
+    fetch(`http://localhost:5000/make-pending/${id}`, {
+      method: "PATCH",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          toast.success("It will go to your pending task list");
+        }
+      });
+  };
+
+  // Delete Task
+  const handleDeleteTask = (id) => {
+    fetch(`http://localhost:5000/delete-task/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.deletedCount > 0) {
+          toast.success("Task Deleted");
+        }
+      });
+  };
 
   return (
     <div className="mx-4">
@@ -50,8 +77,39 @@ const CompletedTaskTable = () => {
                 >
                   {task.name}
                 </th>
-                <td class="py-4 px-6">{task.status}</td>
-                <td class="py-4 px-6"></td>
+                <td class="py-4 px-6">
+                  {task.status === "pending" ? (
+                    <div className="flex items-center">
+                      <div className="h-2.5 w-2.5 rounded-full bg-green-400 mr-2"></div>
+                      <span className="">Pending</span>
+                    </div>
+                  ) : (
+                    <Link>
+                      <div
+                        onClick={() => handleTaskPending(task._id)}
+                        className="flex items-center"
+                      >
+                        <div className="h-2.5 w-2.5 rounded-full bg-green-400 mr-2"></div>
+                        <span className="">Complete</span>
+                      </div>
+                    </Link>
+                  )}
+                </td>
+                <td class="py-4 px-6">
+                  <Link>
+                    <div
+                      onClick={() => handleDeleteTask(task._id)}
+                      className="flex items-center"
+                    >
+                      <button
+                        type="button"
+                        class="text-2xl flex justify-center items-center w-8 h-8 rounded-full bg-red-100 text-red-500 hover:bg-red-500 hover:text-white focus:outline-none focus:bg-red-500 focus:text-white"
+                      >
+                        <MdDelete />
+                      </button>
+                    </div>
+                  </Link>
+                </td>
                 <td class="py-4 px-6">$2999</td>
                 <td class="py-4 px-6 text-right">
                   <Link
