@@ -23,13 +23,14 @@ const TaskForm = () => {
         if (imgData.success) {
           const task = {
             name: data.name,
+            priority: data.priority,
             img: imgData.data.display_url,
             postedBy: user.displayName,
             email: user.email,
             postedTime: new Date().toDateString(),
-            status: "uncompleted",
+            status: "pending",
           };
-          fetch("http://localhost:5000/add-task", {
+          fetch("https://go-productive-server-side.vercel.app/add-task", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -73,6 +74,26 @@ const TaskForm = () => {
             placeholder=""
             className="rounded-none rounded-r-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           />
+        </div>
+
+        {/* Name */}
+        <div>
+          <label>
+            <span className="text-sm font-semibold mt-3">Priority</span>
+          </label>
+
+          <select
+            {...register("priority", {
+              required: "Priority is required",
+            })}
+            id="priority"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          >
+            <option selected>Choose Your Priority</option>
+            <option value="low">Low Priority</option>
+            <option value="medium">Mid Priority</option>
+            <option value="high">High Priority</option>
+          </select>
         </div>
 
         {/* Image */}

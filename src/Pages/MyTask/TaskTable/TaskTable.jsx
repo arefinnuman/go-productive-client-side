@@ -8,7 +8,9 @@ const TaskTable = () => {
   const [myTasks, setMyTask] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/pending-tasks/${user?.email}`)
+    fetch(
+      `https://go-productive-server-side.vercel.app/pending-tasks/${user?.email}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setMyTask(data);
@@ -19,7 +21,7 @@ const TaskTable = () => {
   }, [user?.email]);
 
   const handleTaskComplete = (id) => {
-    fetch(`http://localhost:5000/make-complete/${id}`, {
+    fetch(`https://go-productive-server-side.vercel.app/make-complete/${id}`, {
       method: "PATCH",
     })
       .then((res) => res.json())
@@ -31,7 +33,7 @@ const TaskTable = () => {
   };
 
   const handleEditTask = (id) => {
-    fetch(`http://localhost:5000/edit-task/${id}`, {
+    fetch(`https://go-productive-server-side.vercel.app/edit-task/${id}`, {
       method: "PUT",
     })
       .then((res) => res.json())
@@ -112,23 +114,30 @@ const TaskTable = () => {
                     </div>
                   </div>
                 </th>
-                <td className="py-4 px-6">High Priority</td>
+                <td className="py-4 px-6 uppercase">
+                  {task.priority} Priority
+                </td>
                 <td className="py-4 px-6">
                   <div>
                     {" "}
                     {task.status === "completed" ? (
                       <div className="flex items-center">
-                        <div className="h-2.5 w-2.5 rounded-full bg-green-400 mr-2"></div>
-                        <span className="">Completed</span>
+                        <div className="h-2.5 w-2.5 rounded-full bg-green-400 mr-2 "></div>
+                        <span className="text-green dark:text-green-400 hover:text-green-500 cursor-pointer">
+                          Completed
+                        </span>
                       </div>
                     ) : (
                       <Link to="/completed-task">
-                        <span
+                        <div
                           onClick={() => handleTaskComplete(task._id)}
-                          className="text-green dark:text-green-400 cursor-pointer"
+                          className="flex items-center"
                         >
-                          Incomplete
-                        </span>
+                          <div className="h-2.5 w-2.5 rounded-full bg-red-400 mr-2 "></div>
+                          <span className="text-green dark:text-green-400 hover:text-green-500 cursor-pointer">
+                            Pending
+                          </span>
+                        </div>
                       </Link>
                     )}
                   </div>
@@ -137,7 +146,7 @@ const TaskTable = () => {
                   <Link
                     to="/edit-task"
                     onClick={() => handleEditTask(task._id)}
-                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                    class="font-medium text-blue-600 dark:text-blue-500 hover:cursor-pointer"
                   >
                     Edit Task
                   </Link>

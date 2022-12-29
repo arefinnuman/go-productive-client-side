@@ -9,7 +9,9 @@ const CompletedTaskTable = () => {
   const [myTasks, setMyTask] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/completed-tasks/${user?.email}`)
+    fetch(
+      `https://go-productive-server-side.vercel.app/completed-tasks/${user?.email}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setMyTask(data);
@@ -21,7 +23,7 @@ const CompletedTaskTable = () => {
 
   // Task to pending Mode
   const handleTaskPending = (id) => {
-    fetch(`http://localhost:5000/make-pending/${id}`, {
+    fetch(`https://go-productive-server-side.vercel.app/make-pending/${id}`, {
       method: "PATCH",
     })
       .then((res) => res.json())
@@ -34,7 +36,7 @@ const CompletedTaskTable = () => {
 
   // Delete Task
   const handleDeleteTask = (id) => {
-    fetch(`http://localhost:5000/delete-task/${id}`, {
+    fetch(`https://go-productive-server-side.vercel.app/delete-task/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -87,7 +89,7 @@ const CompletedTaskTable = () => {
                     <Link>
                       <div
                         onClick={() => handleTaskPending(task._id)}
-                        className="flex items-center"
+                        className="flex items-center hover:text-green-500 cursor-pointer"
                       >
                         <div className="h-2.5 w-2.5 rounded-full bg-green-400 mr-2"></div>
                         <span className="">Complete</span>
