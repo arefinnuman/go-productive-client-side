@@ -5,6 +5,8 @@ import Blog from "../../Pages/Blog/Blog/Blog";
 import CompletedTask from "../../Pages/CompletedTask/CompletedTask/CompletedTask";
 import Home from "../../Pages/Home/Home/Home";
 import MyTask from "../../Pages/MyTask/MyTask/MyTask";
+import SignIn from "../../Pages/Shared/SignIn/SignIn";
+import SignUp from "../../Pages/Shared/SignUp/SignUp";
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +36,14 @@ export const router = createBrowserRouter([
       {
         path: "/blog",
         element: <Blog />,
+      },
+      {
+        path: "sign-in",
+        element: <SignIn />,
+      },
+      {
+        path: "sign-up",
+        element: <SignUp />,
       },
     ],
   },
